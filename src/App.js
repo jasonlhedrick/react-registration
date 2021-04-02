@@ -4,21 +4,38 @@ import './App.css';
 
 const serverLoc = 'http://localhost:4000'
 
+
+function toggleFieldset(fieldsetID) {
+  const fieldset = document.querySelector(`#${fieldsetID}`);
+  let cursor = 'wait';
+  let opacity = '0.5';
+
+  if (fieldset.style.cursor === 'wait') cursor = 'auto'; // Simple cursor swap
+  if (fieldset.style.opacity === '0.5') opacity = '1';
+
+  /* Actually swap the styles around */
+  fieldset.style.cursor = cursor;
+  fieldset.disabled = !fieldset.disabled;
+  fieldset.style.opacity = opacity;
+
+  for(let i = 0; i < fieldset.children.length; i++) {
+    fieldset.children[i].disabled = !fieldset.children[i].disabled;
+    fieldset.children[i].style.cursor = cursor;
+    fieldset.children[i].style.opacity = opacity;
+  }
+}
+
 function register(username, password, email) {
-  const registerButton = document.querySelector("#registerButton");
-  registerButton.disabled = true;
-  registerButton.style.cursor = 'wait';
+  toggleFieldset('registrationFieldset');
   axios.post(`${serverLoc}/user`, 
   {'username': username, 'password': password, 'email': email})
   .then(res => {
     console.log(res.data);
-    registerButton.disabled = false;
-    registerButton.style.cursor = 'auto';
+    toggleFieldset('registrationFieldset');
   })
   .catch(err => {
     if (err.response) console.log(err.response.data);
-    registerButton.disabled = false;
-    registerButton.style.cursor = 'auto';
+    toggleFieldset('registrationFieldset');
   });
   
 }
@@ -34,15 +51,15 @@ function App() {
         e.preventDefault();
         register(username, password, email)}
         }>
-          <fieldset>
+          <fieldset id="registrationFieldset">
             <legend>Register an account</legend>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input type="text" name="username" 
             onChange={e => setUsername(e.target.value)}></input>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" name="password" 
             onChange={e => setPassword(e.target.value)}></input>
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input type="email" name="email" 
             onChange={e => setEmail(e.target.value)}></input>
             <button id="registerButton" type="submit">Register</button>
