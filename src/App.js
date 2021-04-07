@@ -31,6 +31,7 @@ function register(username, password, email) {
   {'username': username, 'password': password, 'email': email})
   .then(res => {
     console.log(res.data);
+    localStorage.setItem('token', res.data.token)
     toggleFieldset('registrationFieldset');
   })
   .catch(err => {
