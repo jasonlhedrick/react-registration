@@ -7,6 +7,8 @@ const serverLoc = 'http://localhost:4000'
 
 function toggleFieldset(fieldsetID) {
   const fieldset = document.querySelector(`#${fieldsetID}`);
+  if (fieldset === undefined || null) return;
+  
   let cursor = 'wait';
   let opacity = '0.5';
 
@@ -17,6 +19,8 @@ function toggleFieldset(fieldsetID) {
   fieldset.style.cursor = cursor;
   fieldset.disabled = !fieldset.disabled;
   fieldset.style.opacity = opacity;
+
+  if (fieldset.children.length === 0) return;
 
   for(let i = 0; i < fieldset.children.length; i++) {
     fieldset.children[i].disabled = !fieldset.children[i].disabled;

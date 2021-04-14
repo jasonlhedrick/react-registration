@@ -20,7 +20,7 @@
 }
 
 .registrationForm > fieldset {
-  border: 3px dashed black;
+  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,7 @@
 }
 
 .registrationForm > fieldset > legend {
-  text-align: left;
+  
   font-size: 1.3rem;
   background-color: rgb(25, 25, 25);
   color: antiquewhite;
