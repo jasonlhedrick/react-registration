@@ -54,8 +54,7 @@ function App() {
     <main className="App">
       <form className="registrationForm" onSubmit={(e) => {
         e.preventDefault();
-        register(username, password, email)}
-        }>
+        register(username, password, email)} }>
           <fieldset id="registrationFieldset">
             <legend>Register an account</legend>
             <label htmlFor="username">Username</label>

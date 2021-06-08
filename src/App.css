@@ -17,6 +17,8 @@
   border-radius: 25px;
   padding: 25px;
   width: 35vw;
+  box-shadow: 5px 5px 5px grey,
+  -5px -5px 5px grey;
 }
 
 .registrationForm > fieldset {
